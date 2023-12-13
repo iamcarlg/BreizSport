@@ -6,7 +6,7 @@ export default function Footer() {
 
         {/* FOOTER */}
         <footer style={styles.footer}>
-          <a href="#">A propos</a>
+          <a href="#">A propos d</a>
           <a href="#">Top produits</a>
           <a href="#">Informations</a>
         </footer>
