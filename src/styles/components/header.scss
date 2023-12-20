@@ -1,0 +1,36 @@
+.backgroundnavbar{
+
+    width: 100%;
+    height: 100px;
+    background-color: #FDFDFD;
+    
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100px; /* Définis la hauteur selon tes besoins */
+      }
+      
+    .nav-btn-item{
+        color: rgb(255, 255, 255);
+        font-weight: bold;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+     }
+    .nav-link-item{
+        padding: 10px;
+        border-radius: 50%;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .nav-link-item:hover{
+        color: rgb(77, 13, 13);
+        text-decoration: underline;
+    }
+
+    .nav-right{
+      margin: 0 5px;
+    }
+      
+}

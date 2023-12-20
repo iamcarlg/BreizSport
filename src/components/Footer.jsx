@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 
 export default function Footer() {
+  const styles = {};
+  
   return (
       <div style={styles.body}>
 
         {/* FOOTER */}
-        <footer style={styles.footer}>
-          <a href="#">A propos d</a>
+        <footer>
+          <a href="#">A propos</a>
           <a href="#">Top produits</a>
           <a href="#">Informations</a>
         </footer>
