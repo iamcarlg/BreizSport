@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { hasAuthenticated } from '../services/authApi'
 import dataApi from '../services/dataApi'
+import Header from '../components/Header';
 
 export default function LoginPage() {
 
@@ -41,6 +42,9 @@ export default function LoginPage() {
   
   return (
     <div>
+            {/* HEADER */}
+            <Header />
+
           <div className="generalContent">
             <h1 className="text-center">Se connecter</h1>
 
