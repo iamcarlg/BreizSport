@@ -5,6 +5,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Panier from './pages/Panier';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/panier" element={<Panier />} />
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/signin" element={<Login />} />
       </Routes>

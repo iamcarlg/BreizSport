@@ -7,7 +7,14 @@ export default function Footer() {
       <div style={styles.body}>
 
         {/* FOOTER */}
-        <footer>
+        <footer 
+        style={
+          {
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '20px',            
+          }
+        }>
           <a href="#">A propos</a>
           <a href="#">Top produits</a>
           <a href="#">Informations</a>
