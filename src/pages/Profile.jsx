@@ -3,9 +3,10 @@ import Header from "../components/Header";
 import ContentPage from "./ContentPage";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
-import CardPanier from "../components/CardPanier";
+import CardPayment from "../components/CardPayment";
+import CardProfile from "../components/CardProfile";
 
-export default function Panier() {
+export default function Profile() {
 
   const [data, setData] = useState([
     'Apple', 'Banana', 'Orange', 'Pineapple', 'Strawberry', 'Watermelon'
@@ -58,7 +59,7 @@ export default function Panier() {
         } 
       >
         {/* Card Panier */}
-        <CardPanier />
+        <CardProfile />
       </div>
 
       {/* FOOTER */}
