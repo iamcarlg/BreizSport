@@ -26,8 +26,9 @@ export default function Header() {
 
             <Nav>      
                 <NavLink to="/" className='nav-link-item'>Accueil</NavLink>
-                <NavLink to="/news" className='nav-link-item'>Nouveautés</NavLink>
+                <NavLink to="/products" className='nav-link-item'>Produits</NavLink>
                 <NavLink to="/information" className='nav-link-item'>Informations</NavLink>
+                <NavLink to="/about" className='nav-link-item'>À Propos</NavLink>
             </Nav>     
             
             {/* Items right  auth */}

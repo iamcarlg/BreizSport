@@ -29,11 +29,11 @@ export default function Home() {
         }
       }>
         <SearchBar  onSearch={handleSearch}/>
-        <ul>
+        {/* <ul>
           {filteredData.map((item, index) => (
             <li key={index}>{item}</li>
             ))}
-        </ul>
+        </ul> */}
       </div>
       {/* CONTENU PRINCIPAL */}
       <ContentPage />

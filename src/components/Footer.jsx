@@ -4,21 +4,18 @@ export default function Footer() {
   const styles = {};
   
   return (
-      <div style={styles.body}>
+      <div style={{
+        
+      }}>
 
         {/* FOOTER */}
-        <footer 
-        style={
-          {
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '20px',            
-          }
-        }>
-          <a href="#">A propos</a>
-          <a href="#">Top produits</a>
-          <a href="#">Informations</a>
-        </footer>
+
+        <div style={{width: '100%', height: '100%', position: 'relative'}}>
+          <div style={{width: '30%', height: 288, left: 15, top: 500, position: 'absolute', background: 'rgba(64, 60, 60, 0.80)', borderRadius: 10}} />
+          <div style={{width: '30%', height: 288, left: '35%', top: 500, position: 'absolute', background: 'rgba(64, 60, 60, 0.80)', borderRadius: 10}} />
+          <div style={{width: '30%', height: 288, left: '69%', top: 500, position: 'absolute', background: 'rgba(64, 60, 60, 0.80)', borderRadius: 10}} />
+        </div>
+
 
       </div>
     );
