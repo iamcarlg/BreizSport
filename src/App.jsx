@@ -1,11 +1,9 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from './pages/Login';
 import Home from './pages/Home';
 import ProductsPage from './pages/Products';
+import ProductDetail from './components/ProductDetail'
 import AboutPage from './pages/AboutPage';
 import InfosPage from './pages/InfosPage';
 import Panier from './pages/Panier';
@@ -20,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsPage />} />
+        <Route path="/product/:id" element={<ProductDetail/>} />
         <Route path="/information" element={<InfosPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<Navigate to="/" />} />

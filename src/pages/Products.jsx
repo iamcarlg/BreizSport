@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";  // Import Link from react-router-dom
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 
 const Product = ({ price, index }) => {
@@ -10,23 +10,25 @@ const Product = ({ price, index }) => {
   const marginTop = rowIndex > 0 ? 20 : 0;
 
   return (
-    <div key={index} style={{ 
-      width: 259, 
-      height: 273, 
-      position: 'absolute', 
-      top: 230 + (300 + 20) * rowIndex + marginTop,
-      left: 190 + (350 + 20) * columnIndex, 
-      marginLeft,
-    }}>
-      <div style={{ width: 259, height: 273, position: 'absolute', background: 'white', borderRadius: 10 }}>
-        <div style={{ width: 259, height: 70, position: 'absolute', top: 205, background: '#D9D9D9', borderBottomLeftRadius: 10, borderTopRightRadius: 10 }} />
-        <div style={{ left: 201, top: 205, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 24, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' }}>{price}€</div>
+    <Link to={`/product/${index}`} key={index}>  {/* Use Link to wrap the product */}
+      <div style={{ 
+        width: 259, 
+        height: 273, 
+        position: 'absolute', 
+        top: 230 + (300 + 20) * rowIndex + marginTop,
+        left: 190 + (350 + 20) * columnIndex, 
+        marginLeft,
+      }}>
+        <div style={{ width: 259, height: 273, position: 'absolute', background: 'white', borderRadius: 10 }}>
+          <div style={{ width: 259, height: 70, position: 'absolute', top: 205, background: '#D9D9D9', borderBottomLeftRadius: 10, borderTopRightRadius: 10 }} />
+          <div style={{ left: 201, top: 205, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 24, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' }}>{price}€</div>
+        </div>
+        <div style={{ width: 86, height: 28, left: 86, top: 238, position: 'absolute' }}>
+          <div style={{ width: 86, height: 28, position: 'absolute', background: '#2D9DB6', borderRadius: 10 }} />
+          <div style={{ width: 74, left: 6, top: 2, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' }}>Ajouter</div>
+        </div>
       </div>
-      <div style={{ width: 86, height: 28, left: 86, top: 238, position: 'absolute' }}>
-        <div style={{ width: 86, height: 28, position: 'absolute', background: '#2D9DB6', borderRadius: 10 }} />
-        <div style={{ width: 74, left: 6, top: 2, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' }}>Ajouter</div>
-      </div>
-    </div>
+    </Link>
   );
 };
 
@@ -41,7 +43,7 @@ export default function ProductsPage() {
   const handleSearch = (searchTerm) => {
     const filtered = data.filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredData(filtered);
-    setCurrentPage(1); // Reset to the first page when the search term changes
+    setCurrentPage(1);
   };
 
   const handleClickPage = (pageNumber) => {
