@@ -1,6 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import ProductsPage from './pages/Products';
 import ProductDetail from './components/ProductDetail'
@@ -24,6 +25,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
 
         <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/panier" element={<Panier />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/profile" element={<Profile />} />

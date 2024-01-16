@@ -32,7 +32,7 @@ export default function Header() {
             </Nav>     
             
             {/* Items right  auth */}
-            {!isAuthenticated && (
+            {isAuthenticated && (
               <Nav>
                 <ListGroup className="nav-right">
                   <NavLink to="/panier">
