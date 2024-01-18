@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import dataApi from '../services/dataApi';
 import Header from '../components/Header';
 
@@ -8,7 +8,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const history = useHistory();
+  const Navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
