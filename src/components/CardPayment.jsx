@@ -196,7 +196,7 @@ function CardPayment() {
                             </h2>
                             <div className='div-form'>
                                 <div className='container text-center '>
-                                    <label>Adresse : </label>
+                                    <label>Adresse* : </label>
                                     <input className="inputAddress" type='text' onChange={handleChangeValidateAddress2} readOnly={ValidateAddress} value={ValidateAddress2}/>
                                 </div>
                                 <div className='container text-center dd'>
@@ -204,11 +204,11 @@ function CardPayment() {
                                     <input className="" type="text" readOnly={ValidateAddress} onChange={handleChangeValidateCpl} value={ValidateCpl}/>
                                 </div>
                                 <div className='container text-center dd'>
-                                    <label>Ville : </label>
+                                    <label>Ville* : </label>
                                     <input className="inputCity" type='text' onChange={handleChangeValidateCity} readOnly={ValidateAddress} value={ValidateCity}/>
                                 </div>
                                 <div className='container text-center dd'>
-                                    <label>Code postal : </label>
+                                    <label>Code postal* : </label>
                                     <input className="inputCp" type='text' onChange={handleChangeValidateCp} readOnly={ValidateAddress} value={ValidateCp}/>
                                 </div>
                             </div>
