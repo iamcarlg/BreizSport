@@ -11,6 +11,7 @@ import Panier from './pages/Panier';
 import Payment from './pages/Payment';
 import './styles/index.scss';
 import Profile from './pages/Profile';
+import Logout from './pages/Logout';
 import { hasAuthenticated } from './services/authApi'
 import { useState } from 'react';
 
@@ -26,8 +27,6 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/panier" element={<Panier />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/profile" element={<Profile />} />
 
         {/* Route non authentifié */}
         {!isAuthenticated && (
@@ -35,7 +34,14 @@ function App() {
             <Route path="/signin" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
           </>
-        )}
+        ) || (
+          <>
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/logout" element={<Logout />} />
+          </>
+        )
+        }
 
 
       </Routes>
