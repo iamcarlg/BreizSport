@@ -11,9 +11,11 @@ import Panier from './pages/Panier';
 import Payment from './pages/Payment';
 import './styles/index.scss';
 import Profile from './pages/Profile';
+import { hasAuthenticated } from './services/authApi'
+import { useState } from 'react';
 
 function App() {
-
+  const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated);
   return (
     <BrowserRouter>
       <Routes>
@@ -23,12 +25,19 @@ function App() {
         <Route path="/information" element={<InfosPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<Navigate to="/" />} />
-
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
         <Route path="/panier" element={<Panier />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/profile" element={<Profile />} />
+
+        {/* Route non authentifié */}
+        {!isAuthenticated && (
+          <>        
+            <Route path="/signin" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+          </>
+        )}
+
+
       </Routes>
     </BrowserRouter>
   )

@@ -2,6 +2,9 @@ import React, { useState, useContext, useEffect } from 'react'
 import { hasAuthenticated } from '../services/authApi'
 import dataApi from '../services/dataApi'
 import Header from '../components/Header';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function LoginPage() {
 
@@ -9,6 +12,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated);
+  const navigate = useNavigate();
 
   const params = {
     "email":email, 
@@ -25,13 +29,10 @@ export default function LoginPage() {
       console.log(response.data);
       if (response.status === 200) {
         const token = response.data.access_token;
-        const user = response.data.user;
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', user);
+        Cookies.set("token", token);
         setIsAuthenticated(true);
         // refresh la page
-        // navigate('/');
-        // window.location.reload();
+        navigate('/');
       }
     })
     .catch(error => {

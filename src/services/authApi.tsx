@@ -1,6 +1,8 @@
+import Cookies from 'js-cookie';
+
 export function hasAuthenticated () {
     // si l'utilisateur est connecté on retourne true
-    if (localStorage.getItem('token')) {
+    if (Cookies.get('token') != null){
         return true;
     }
     // sinon on retourne false
