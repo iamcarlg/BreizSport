@@ -18,6 +18,7 @@ export default function Logout() {
             setIsAuthenticated(false);
             // refresh la page
             navigate('/');
+            window.location.reload();
           }
         })
         .catch((error) => {
