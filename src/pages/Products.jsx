@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";  // Import Link from react-router-dom
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
+import dataApi from "../services/dataApi";
 
-const Product = ({ price, index }) => {
+const Product = ({ price, index, name, id }) => {
+  const [posts, setPosts] = useState("");
+
+
   const columnIndex = index % 4;
   const rowIndex = Math.floor(index / 4);
   const marginLeft = columnIndex > 0 ? 20 : 0;
   const marginTop = rowIndex > 0 ? 20 : 0;
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+
+
+  const handleAddArticle = (id) => {
+    console.log(cart)
+    const newCart = [...cart, id];
+    setCart(newCart);
+
+    localStorage.setItem('addArticle', JSON.stringify(newCart.length));
+    localStorage.setItem('cart', JSON.stringify(newCart));
+  }
+  
 
   return (
-    <Link to={`/product/${index}`} key={index}>  {/* Use Link to wrap the product */}
+    // <Link to={`/product/${id}`} key={id}>  {/* Use Link to wrap the product */}
       <div style={{ 
         width: 259, 
         height: 273, 
@@ -20,15 +36,23 @@ const Product = ({ price, index }) => {
         marginLeft,
       }}>
         <div style={{ width: 259, height: 273, position: 'absolute', background: 'white', borderRadius: 10 }}>
+          {name}
           <div style={{ width: 259, height: 70, position: 'absolute', top: 205, background: '#D9D9D9', borderBottomLeftRadius: 10, borderTopRightRadius: 10 }} />
           <div style={{ left: 201, top: 205, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 24, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' }}>{price}€</div>
         </div>
         <div style={{ width: 86, height: 28, left: 86, top: 238, position: 'absolute' }}>
           <div style={{ width: 86, height: 28, position: 'absolute', background: '#2D9DB6', borderRadius: 10 }} />
-          <div style={{ width: 74, left: 6, top: 2, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' }}>Ajouter</div>
+          <div style={{ width: 74, left: 6, top: 2, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 20, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' 
+          , cursor: 'pointer' }}            
+          onClick={() => {
+            handleAddArticle(id)
+          }}
+          > 
+            Ajouter 
+            </div>
         </div>
       </div>
-    </Link>
+    // </Link>
   );
 };
 
@@ -65,11 +89,19 @@ export default function ProductsPage() {
     }
     return pages;
   };
+  
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    dataApi.getAllPosts().then((response) => {
+      setPosts(response.data.result);
+    })
+  }, []);
+
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const visibleProducts = filteredData.slice(startIndex, endIndex);
-
+  console.log(posts)
   return (
     <div>
       {/* HEADER */}
@@ -78,8 +110,11 @@ export default function ProductsPage() {
         <SearchBar onSearch={handleSearch} />
       </div>
       {/* TOUS LES PRODUITS */}
-      {visibleProducts.map((product, index) => (
-        <Product key={startIndex + index} price="100" index={startIndex + index} />
+      {posts.map((product, index) => (
+        <>
+        
+        <Product key={startIndex + index} price={product.forms_id} index={startIndex + index} name={product.projects_description} id={product.projects_id}  />
+        </>
       ))}
       {/* PAGINATION */}
       <div style={{ marginTop: '20px' }}>

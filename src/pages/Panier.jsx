@@ -4,6 +4,7 @@ import ContentPage from "./ContentPage";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import CardPanier from "../components/CardPanier";
+import dataApi from "../services/dataApi";
 
 export default function Panier() {
 
@@ -20,6 +21,15 @@ export default function Panier() {
     );
     setFilteredData(filtered);
   };
+
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    dataApi.getAllPosts().then((response) => {
+      setPosts(response.data.result);
+    })
+  }, []);
 
 
   // Code Modal
@@ -58,7 +68,7 @@ export default function Panier() {
         } 
       >
         {/* Card Panier */}
-        <CardPanier />
+        <CardPanier orders={posts} />
       </div>
 
       {/* FOOTER */}

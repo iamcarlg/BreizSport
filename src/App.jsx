@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import ProductsPage from './pages/Products';
-import ProductDetail from './components/ProductDetail'
+import ProductDetail from './pages/ProductDetail'
 import AboutPage from './pages/AboutPage';
 import InfosPage from './pages/InfosPage';
 import Panier from './pages/Panier';

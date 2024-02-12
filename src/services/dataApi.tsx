@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 // const USER_BASE_REST_API_URL = "url";
 const REST_API_URL = "http://localhost:8000/api/";
 
+
 // define the default configuration for axios
 axios.defaults.headers.get['Accept'] = 'application/json';
 // Récupération du token dans les cookies
