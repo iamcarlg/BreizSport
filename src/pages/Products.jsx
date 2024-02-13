@@ -5,7 +5,6 @@ import SearchBar from "../components/SearchBar";
 import dataApi from "../services/dataApi";
 
 const Product = ({ price, index, name, id }) => {
-  const [posts, setPosts] = useState("");
 
   const columnIndex = index % 3;
   const rowIndex = Math.floor(index / 3);
@@ -64,8 +63,8 @@ export default function ProductsPage() {
 
   useEffect(() => {
     dataApi.getAllProducts().then((response) => {
-      console.log(response);
-      setPosts(response.data.result);
+      console.log(response.data);
+      setPosts(response.data);
 
     })
   }, []);
@@ -113,10 +112,10 @@ export default function ProductsPage() {
           <React.Fragment key={startIndex + index}>
             <Product
               key={startIndex + index}
-              price={product.forms_id}
+              price={product.price}
               index={index}
-              name={product.projects_description}
-              id={product.projects_id}
+              name={product.name}
+              id={product.id}
             />
           </React.Fragment>
         ) : null

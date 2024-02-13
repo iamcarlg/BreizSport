@@ -26,8 +26,8 @@ export default function Panier() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    dataApi.getAllPosts().then((response) => {
-      setPosts(response.data.result);
+    dataApi.getAllProducts().then((response) => {
+      setPosts(response.data);
     })
   }, []);
 

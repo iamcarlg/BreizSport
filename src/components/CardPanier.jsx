@@ -4,7 +4,7 @@ export default function CardPanier(props) {
 
   // filtre les orders id
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
-  const orders = props.orders.filter(order => cart.includes(order.projects_id))
+  const orders = props.orders.filter(order => cart.includes(order.id))
 
   console.log(orders)
   return (
@@ -51,7 +51,7 @@ export default function CardPanier(props) {
                   }
               }
               >
-                {order.projects_description}
+                {order.name}
               </div>
               <div 
               style={
