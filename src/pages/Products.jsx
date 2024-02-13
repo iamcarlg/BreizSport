@@ -63,8 +63,10 @@ export default function ProductsPage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    dataApi.getAllPosts().then((response) => {
+    dataApi.getAllProducts().then((response) => {
+      console.log(response);
       setPosts(response.data.result);
+
     })
   }, []);
 

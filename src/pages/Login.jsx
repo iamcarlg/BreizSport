@@ -15,7 +15,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const params = {
-    "email":email, 
+    "username":email, 
     "password":password
   }
 

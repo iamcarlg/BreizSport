@@ -1,33 +1,61 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import dataApi from '../services/dataApi';
-import Header from '../components/Header';
+import React, { useState } from "react";
+import Header from "../components/Header";
+import dataApi from "../services/dataApi";
 
-export default function SignupPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordAgain, setPasswordAgain] = useState('');
-  const [error, setError] = useState(null);
+export default function PasswordForm() {
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const Navigate = useNavigate();
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handlePasswordChange = (e, setPassword) => {
+    setPassword(e.target.value);
+    // Vérifier si les mots de passe correspondent
+    if (password2 !== "" && e.target.value !== password2) {
+      setPasswordsMatch(false);
+    } else {
+      setPasswordsMatch(true);
+    }
+  };
 
-    const params = {
-      email: email,
-      password: password,
-    };
+  const params = {
+    "username" : email,
+    "password" : password1
+  }
 
-    try {
-      const response = await dataApi.signup(params);
-      if (response.status === 201) {
-        // Inscription réussie
-        // Rediriger vers la page de connexion ou toute autre page appropriée
-        history.push('/login');
-      }
-    } catch (error) {
-      setError("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Vérifier si les mots de passe correspondent lors de la soumission du formulaire
+    if (password1 === password2) {
+      console.log("Les mots de passe correspondent :", password1);
+      console.log("Email :", email);
+      // Effectuez ici l'action de soumission du formulaire
+      setFormSubmitted(true); // Mettre à jour l'état pour indiquer que le formulaire a été soumis
+
+      dataApi.signup(params)
+      .then((response) => {
+        console.log(response.data);
+        if (response.status === 200) {
+          const token = response.data.access_token;
+          Cookies.set("token", token);
+          setIsAuthenticated(true);
+          // refresh la page
+          navigate('/');
+        }
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+        setError("Le nom d'utilisateur ou le mot de passe n'est pas correct !");
+      });
+      
+    } else {
+      console.log("Les mots de passe ne correspondent pas.");
+      setPasswordsMatch(false); // Mettre à jour l'état pour afficher le message d'erreur
     }
   };
 
@@ -35,41 +63,37 @@ export default function SignupPage() {
     <div>
       {/* HEADER */}
       <Header />
-
-      <div className="generalContent">
-        <h1 className="text-center">S'inscrire</h1>
-
-        <center>
-          <img src="icon_hamburger.svg" className="mx-3 my-4" alt="Hamburger Icon" />
-        </center>
-
-        <form onSubmit={handleSubmit} className="formContent" method="post">
-          {error && <p className="text-danger">{error}</p>}
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              className="form-control"
-              id="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Mot de passe</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            S'inscrire
-          </button>
-        </form>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Email :</label>
+          <input
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <div>
+          <label>Mot de passe :</label>
+          <input
+            type="password"
+            value={password1}
+            onChange={(e) => handlePasswordChange(e, setPassword1)}
+          />
+        </div>
+        <div>
+          <label>Confirmer le mot de passe :</label>
+          <input
+            type="password"
+            value={password2}
+            onChange={(e) => handlePasswordChange(e, setPassword2)}
+          />
+        </div>
+        {!passwordsMatch && (
+          <p style={{ color: "red" }}></p>
+        )}
+        {formSubmitted && <p style={{ color: "green" }}>Formulaire soumis avec succès !</p>}
+        <button type="submit">Soumettre</button>
+      </form>
     </div>
   );
 }

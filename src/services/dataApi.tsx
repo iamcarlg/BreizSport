@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 // // const USER_BASE_REST_API_URL = "url";
 // const REST_API_URL = "http://localhost:8000/api/";
-const REST_API_URL = "http://52.47.136.150/api/"
+const REST_API_URL = "http://10.192.129.121/bs_api/public/index.php/"
 
 // define the default configuration for axios
 axios.defaults.headers.get['Accept'] = 'application/json';
@@ -16,17 +16,21 @@ const config = {
 class dataApi{
 
 // REQUESTS FOR AUTHENTIFICATION
+signup(params){      
+    return axios.post(REST_API_URL + 'register', params)
+}  
+
 login(params){      
-    return axios.post(REST_API_URL + 'login', params)
+    return axios.post(REST_API_URL + 'login-authentication', params)
 }   
 
 logout(){
     return axios.get(REST_API_URL + 'logout',config)
 }
 
-// REQUESTS TEST DATA POSTS    
-getAllPosts(){
-    return axios.get(REST_API_URL + 'posts')
+// REQUESTS TEST DATA POSTS
+getAllProducts(){
+    return axios.get(REST_API_URL + 'get-product')
 }
     
 }

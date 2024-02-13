@@ -8,17 +8,19 @@ import { hasAuthenticated } from '../services/authApi'
 export default function Logout() {
     const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated);
     const navigate = useNavigate();
+
+    Cookies.remove("token");
+    setIsAuthenticated(false);
+    // refresh la page
+    navigate('/');
+    window.location.reload();
+    
     useEffect(() => {
         dataApi.logout()
         .then((response) => {
           if (response.status === 200) {
             const token = response.data.access_token;
             // remove token
-            Cookies.remove("token");
-            setIsAuthenticated(false);
-            // refresh la page
-            navigate('/');
-            window.location.reload();
           }
         })
         .catch((error) => {
