@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-// const USER_BASE_REST_API_URL = "url";
-const REST_API_URL = "http://localhost:8000/api/";
-
+// // const USER_BASE_REST_API_URL = "url";
+// const REST_API_URL = "http://localhost:8000/api/";
+const REST_API_URL = "http://52.47.136.150/api/"
 
 // define the default configuration for axios
 axios.defaults.headers.get['Accept'] = 'application/json';

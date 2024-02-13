@@ -8,8 +8,8 @@ const Product = ({ price, index, name, id }) => {
   const [posts, setPosts] = useState("");
 
 
-  const columnIndex = index % 4;
-  const rowIndex = Math.floor(index / 4);
+  const columnIndex = index % 3;
+  const rowIndex = Math.floor(index / 3);
   const marginLeft = columnIndex > 0 ? 20 : 0;
   const marginTop = rowIndex > 0 ? 20 : 0;
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
