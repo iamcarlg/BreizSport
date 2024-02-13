@@ -28,8 +28,12 @@ export default function LoginPage() {
     .then((response) => {
       console.log(response.data);
       if (response.status === 200) {
-        const token = response.data.access_token;
+        const token = response.data.apiToken;
         Cookies.set("token", token);
+        Cookies.set("userId", response.data.userId);
+        Cookies.set("username", params.username);
+
+
         setIsAuthenticated(true);
         // refresh la page
         navigate('/');

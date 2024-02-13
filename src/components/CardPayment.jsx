@@ -2,6 +2,7 @@ import React, {useState, useEffect }from 'react';
 import dataApi from '../services/dataApi';
 import { useNavigate } from 'react-router-dom';
 import { Button,Modal } from 'react-bootstrap';
+import Cookies from 'js-cookie';
 function CardPayment() {
 
 
@@ -42,6 +43,28 @@ function CardPayment() {
     const handleShow = () => setShow(true);
     const [showA, setShowA] = useState(false);
     const toggleShowA = () => setShowA(!showA);
+
+    const userId = Cookies.get("userId");
+    const email = Cookies.get("username");
+    const listProductIds = localStorage.getItem("cart");    
+
+    // covertir en array
+    const listProductIdsArray = listProductIds.split(",");
+
+    // Supprimer les crochets et les guillemets
+    const resultArray = listProductIds.replace(/[\[\]"]/g, '').split(',');
+
+console.log(resultArray)
+    const params = {
+        "userId":userId, 
+        "email":email,
+        "rib":"123456789",
+        "cardNumber":"123456789",
+        "expirationCardDate":"12/24",
+        "price":"100",
+        "listProductId":resultArray,
+
+      }
     const handleClickPrev = () => {
         // Vérifie si les champs sont remplis
         if(showDiv1 === "col"){
@@ -84,8 +107,21 @@ function CardPayment() {
                 }
                 else{
                     console.log(ValidateAddress2 + ' ' + ValidateCity + ' ' + ValidateCp + ' ' + commentaire);
-                    alert("Votre commande a bien été prise en compte");
+                  
                     // redirect to page d'accueil
+                    dataApi.validateOrder(params)
+                    .then((response) => {
+                      console.log(response.data);
+                      if (response.status < 300) {
+                        alert("Votre commande a bien été prise en compte");
+                        // refresh la page
+                        navigate('/');
+                      }
+                    })
+                    .catch(error => {
+                      console.log("ERROR", error);
+                      setError("Le nom d'utilisateur ou le mot de passe n'est pas correct !");
+                    });
                     navigate("/"); 
                 }
             }

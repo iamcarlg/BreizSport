@@ -15,24 +15,30 @@ const config = {
 
 class dataApi{
 
-// REQUESTS FOR AUTHENTIFICATION
-signup(params){      
-    return axios.post(REST_API_URL + 'register', params)
-}  
+    // REQUESTS FOR AUTHENTIFICATION
+    signup(params){      
+        return axios.post(REST_API_URL + 'register', params)
+    }  
 
-login(params){      
-    return axios.post(REST_API_URL + 'login-authentication', params)
-}   
+    login(params){      
+        return axios.post(REST_API_URL + 'login-authentication', params)
+    }   
 
-logout(){
-    return axios.get(REST_API_URL + 'logout',config)
-}
+    logout(){
+        return axios.get(REST_API_URL + 'logout',config)
+    }
 
-// REQUESTS TEST DATA POSTS
-getAllProducts(){
-    return axios.get(REST_API_URL + 'get-product')
-}
+    // REQUESTS TEST DATA POSTS
+    getAllProducts(){
+        return axios.get(REST_API_URL + 'get-product')
+    }
     
+
+    // Validation d'une commande
+    validateOrder(params){
+        return axios.post(REST_API_URL + 'post-command', params)
+    }
+
 }
 
 
