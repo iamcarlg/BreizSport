@@ -59,6 +59,10 @@ export default function Header() {
                         </clipPath>
                       </defs>
                     </svg>
+
+                    <ul>
+                      <li>Déconnectez</li>
+                    </ul>
                   </NavLink>
                 </ListGroup>
               </Nav>

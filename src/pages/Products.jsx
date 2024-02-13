@@ -36,6 +36,7 @@ const Product = ({ price, index, name, id }) => {
         <div style={{ width: 259, height: 273, position: 'absolute', background: 'white', borderRadius: 10 }}>
           {name}
           <div style={{ width: 259, height: 70, position: 'absolute', top: 205, background: '#D9D9D9', borderBottomLeftRadius: 10, borderTopRightRadius: 10 }} />
+          <img src={`./images/${index}.jpg`} alt="" />
           <div style={{ left: 201, top: 205, position: 'absolute', textAlign: 'center', color: 'black', fontSize: 24, fontFamily: 'Inter', fontWeight: '400', textTransform: 'capitalize', wordWrap: 'break-word' }}>{price}€</div>
         </div>
         <div style={{ width: 86, height: 28, left: 86, top: 238, position: 'absolute' }}>
@@ -59,14 +60,19 @@ export default function ProductsPage() {
   const [filteredData, setFilteredData] = useState([...data]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemsPerPage = 8;
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const [posts, setPosts] = useState([]);
 
-  const handleSearch = (searchTerm) => {
-    const filtered = data.filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()));
-    setFilteredData(filtered);
-    setCurrentPage(1);
-  };
+  useEffect(() => {
+    dataApi.getAllPosts().then((response) => {
+      setPosts(response.data.result);
+    })
+  }, []);
+
+  const itemsPerPage = 9;
+
+  const totalPages = Math.ceil(posts.length / itemsPerPage);
+
+ 
 
   const handleClickPage = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -79,7 +85,7 @@ export default function ProductsPage() {
         <span 
           key={i} 
           onClick={() => handleClickPage(i)} 
-          style={{ cursor: 'pointer', marginRight: '5px', textDecoration: currentPage === i ? 'underline' : 'none' }}
+          style={{ cursor: 'pointer', marginRight: '10px', textDecoration: currentPage === i ? 'underline' : 'none' }}
         >
           {i}
         </span>
@@ -88,32 +94,32 @@ export default function ProductsPage() {
     return pages;
   };
   
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    dataApi.getAllPosts().then((response) => {
-      setPosts(response.data.result);
-    })
-  }, []);
+
 
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const visibleProducts = filteredData.slice(startIndex, endIndex);
-  console.log(posts)
+  const visibleProducts = posts.slice(startIndex, endIndex);
   return (
     <div>
       {/* HEADER */}
       <Header />
-      <div style={{ marginTop: 15 }}>
-        <SearchBar onSearch={handleSearch} />
-      </div>
+
       {/* TOUS LES PRODUITS */}
-      {posts.map((product, index) => (
-        <>
-        
-        <Product key={startIndex + index} price={product.forms_id} index={startIndex + index} name={product.projects_description} id={product.projects_id}  />
-        </>
+      {visibleProducts.map((product, index) => (
+        product ? (
+          <React.Fragment key={startIndex + index}>
+            <Product
+              key={startIndex + index}
+              price={product.forms_id}
+              index={index}
+              name={product.projects_description}
+              id={product.projects_id}
+            />
+          </React.Fragment>
+        ) : null
       ))}
+
       {/* PAGINATION */}
       <div style={{ marginTop: '20px' }}>
         {renderPagination()}
